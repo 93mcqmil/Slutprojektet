@@ -1,19 +1,19 @@
 import "./Navbar.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <nav className='nav-container'>
-      <NavLink to={"/"}>Open Library</NavLink>
+      <Link to={"/"}>Open Library</Link>
 
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <NavLink to={"/books"}>Books</NavLink>
+        <Link to={"/books"}>Books</Link>
       </li>
       <li>
-        <NavLink to={"/favourites"}>Favourites</NavLink>
+        <Link to={"/favourites"}>Favourites</Link>
       </li>
     </nav>
   );

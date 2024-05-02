@@ -1,14 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/HomePage";
-
+import Books from "./components/Navbar/Books";
+import Favorites from "./components/Navbar/Favorites";
+import ErrorPage from "./error-page";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    errorElement: <ErrorPage />,
+    element: <HomePage />, // children of homepage(click any of these paths and Navbar follows)
+    children: [
+      { path: "/books", element: <Books /> },
+      { path: "/favorites", element: <Favorites /> },
+    ],
   },
 ]);
 
