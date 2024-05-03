@@ -2,6 +2,7 @@ import { useRoutes } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import Books from "./Navbar/Books";
 import Favorites from "./Navbar/Favorites";
+import SearchField from "./Navbar/SearchField/SearchField";
 
 const HomePage: React.FC = () => {
   const routes = useRoutes([
@@ -11,6 +12,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Navbar />
+      <SearchField />
       <main>{routes}</main>
     </>
   );
