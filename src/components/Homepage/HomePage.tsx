@@ -1,8 +1,8 @@
 import { useRoutes } from "react-router-dom";
-import Navbar from "./Navbar/Navbar";
-import Books from "./Navbar/Books";
-import Favorites from "./Navbar/Favorites";
-import SearchField from "./Navbar/SearchField/SearchField";
+import Navbar from "../Navbar/Navbar";
+import Books from "../Navbar/Books";
+import Favorites from "../Navbar/Favorites";
+import SearchField from "../Navbar/SearchField/SearchField";
 
 const HomePage: React.FC = () => {
   const routes = useRoutes([
