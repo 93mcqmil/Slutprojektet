@@ -1,38 +1,44 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
+import { searchResult } from "../../../Globalstate";
 
 export default function SearchField() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResult, setSearchResult] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<searchResult[] | null>(
+    null
+  ); //initially state variable is null(when no data has been fetched yet)
 
   useEffect(() => {
+    //checks if searchterm is an empty string or contains whitespce characters
     if (searchTerm.trim() === "") {
-      setSearchResult([]);
+      setSearchResults(null);
       return;
     }
     axios
       .get("https://openlibrary.org/search/authors.json?q=j")
       .then((res) => {
         console.log(res.data); // log response data
-        setSearchResult(res.data.results);
+        setSearchResults(res.data.results);
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
-        setSearchResult([]);
+        setSearchResults([]);
       });
   }, [searchTerm]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
-  const handleSearch = () => {
-    // search filtering based on searchterm
-    const filteredResults = searchResult.filter((item) => {
-      // each item has a title property to search against
-      return item.title.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    // update searchresult state with filtered results
-    setSearchResult(filteredResults);
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get<searchResult>(
+        `https://openlibrary.org/search/authors.json?q=${searchTerm}`
+      );
+      setSearchResults(response.data.docs);
+    } catch (error) {
+      console.error("error fetching data:", error);
+      setSearchResults([]);
+    }
   };
 
   return (
@@ -47,10 +53,10 @@ export default function SearchField() {
       />
 
       <button onClick={handleSearch}>Search</button>
-      {searchResult && searchResult.length > 0 && (
+      {searchResults && searchResults.length > 0 && (
         <ul>
-          {searchResult.map((item) => (
-            <li key={item.key}>{item.names}</li>
+          {searchResults.map((doc) => (
+            <li key={doc.key}>{doc.name}</li>
           ))}
         </ul>
       )}

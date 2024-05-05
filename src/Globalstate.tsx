@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { Key, ReactNode, createContext, useState } from "react";
 
 // define type for global state
 type GlobalState = {
@@ -15,6 +15,20 @@ export interface Book {
 export interface RouterError {
   code: number;
   message: string;
+}
+export interface searchResult {
+  numfound: number;
+  start: number;
+  numFoundExact: boolean;
+  docs: {
+    key: string;
+    name: string;
+    top_subjects: string[];
+    top_work: string;
+    type: string;
+    work_count: number;
+    _version_: number;
+  }[];
 }
 
 // create global state context and we keep track of our books
