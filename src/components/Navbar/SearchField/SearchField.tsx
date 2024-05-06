@@ -7,6 +7,8 @@ export default function SearchField() {
   const [searchResults, setSearchResults] = useState<searchResult[] | null>(
     null
   ); //initially state variable is null(when no data has been fetched yet)
+  const [loading, setLoading] = useState(false);
+  //state for loading
 
   useEffect(() => {
     //checks if searchterm is an empty string or contains whitespce characters
@@ -14,6 +16,9 @@ export default function SearchField() {
       setSearchResults(null);
       return;
     }
+    //show loading
+    setLoading(true);
+
     axios
       .get("https://openlibrary.org/search/authors.json?q=j")
       .then((res) => {
@@ -23,6 +28,9 @@ export default function SearchField() {
       .catch((err) => {
         console.error("Error fetching data:", err);
         setSearchResults([]);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [searchTerm]);
 
@@ -31,6 +39,9 @@ export default function SearchField() {
   };
   const handleSearch = async () => {
     try {
+      //show loading
+      setLoading(true);
+
       const response = await axios.get<searchResult>(
         `https://openlibrary.org/search/authors.json?q=${searchTerm}`
       );
@@ -38,6 +49,9 @@ export default function SearchField() {
     } catch (error) {
       console.error("error fetching data:", error);
       setSearchResults([]);
+    } finally {
+      //hide loading indicator when request is complete
+      setLoading(false);
     }
   };
 
@@ -53,12 +67,17 @@ export default function SearchField() {
       />
 
       <button onClick={handleSearch}>Search</button>
-      {searchResults && searchResults.length > 0 && (
-        <ul>
-          {searchResults.map((doc) => (
-            <li key={doc.key}>{doc.name}</li>
-          ))}
-        </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        searchResults &&
+        searchResults.length > 0 && (
+          <ul>
+            {searchResults.map((doc) => (
+              <li key={doc.key}>{doc.name}</li>
+            ))}
+          </ul>
+        )
       )}
     </>
   );

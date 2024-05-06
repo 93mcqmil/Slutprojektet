@@ -17,6 +17,8 @@ export interface RouterError {
   message: string;
 }
 export interface searchResult {
+  key: Key | null | undefined;
+  name: ReactNode;
   numfound: number;
   start: number;
   numFoundExact: boolean;
