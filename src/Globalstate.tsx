@@ -16,12 +16,14 @@ export interface RouterError {
 }
 /********************************* */
 export interface BookResult {
+  isbn: ReactNode;
   key: string;
   author_key: string;
   author_name: string;
   title: string;
   ebook_access: string;
   first_publish_year: number;
+  top_work: string;
 }
 export interface BookSearchResult {
   numFound: number;
@@ -31,8 +33,10 @@ export interface BookSearchResult {
 }
 /******************************* */
 export interface authorResult {
-  type: string;
+  title: string;
   top_work: string;
+  name: string;
+  type: string;
   key: string;
   birth_date: number;
   author_key: number;

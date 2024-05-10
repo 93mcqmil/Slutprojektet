@@ -9,6 +9,7 @@ import { GlobalStateContext } from "../../../Globalstate";
 
 export default function SearchField() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchType, setSearchType] = useState("author"); // Default to searching for authors
   const [loading, setLoading] = useState(false);
   const [searchResultsAuthors, setSearchResultsAuthors] =
     useState<authorSearchResult | null>(null);
@@ -18,6 +19,7 @@ export default function SearchField() {
   const { updateSearchResultsAuthors } = useContext(GlobalStateContext);
   const [searchClicked, setSearchClicked] = useState(false);
 
+  //Effect hook to fetch data when search term or searh type changes
   useEffect(() => {
     console.log("useEffect triggered");
     const fetchData = async () => {
@@ -28,26 +30,33 @@ export default function SearchField() {
       setLoading(true);
 
       try {
-        const authorSearchAPI = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=1`;
-        const bookSearchAPI = `https://openlibrary.org/search.json?title=${searchTerm}&limit=1`;
+        let apiURL = "";
+        // construct API url based on search type
+        if (searchType === "author") {
+          apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=5`;
+        } else {
+          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=1`;
+        }
 
-        const authorResponse = await fetch(authorSearchAPI);
-        const bookResponse = await fetch(bookSearchAPI);
+        //fetch data from api
+        const response = await fetch(apiURL);
 
-        if (!authorResponse.ok || !bookResponse.ok) {
+        if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
 
-        const authorSearchData: authorSearchResult =
-          await authorResponse.json();
-        const bookSearchData: BookSearchResult = await bookResponse.json();
+        //parse response json
+        const searchData = await response.json();
 
-        setSearchResultsAuthors(authorSearchData);
-        console.log("Authors Data:", authorSearchData.docs);
-
-        setSearchResultsBooks(bookSearchData);
-        console.log("Books Data:", bookSearchData);
-        updateSearchResultsBooks(bookSearchData.docs);
+        //update state based on search type
+        if (searchType === "author") {
+          setSearchResultsAuthors(searchData);
+          console.log("Authors Data:", searchData.docs);
+        } else {
+          setSearchResultsBooks(searchData);
+          console.log("Books Data:", searchData);
+          updateSearchResultsBooks(searchData.docs);
+        }
       } catch (error) {
         console.error("Error fetching search results:", error);
       } finally {
@@ -59,6 +68,7 @@ export default function SearchField() {
   }, [
     searchClicked,
     searchTerm,
+    searchType,
     updateSearchResultsBooks,
     updateSearchResultsAuthors,
   ]);
@@ -67,8 +77,14 @@ export default function SearchField() {
     setSearchClicked(true);
   };
 
+  //handler for search term input change
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+  };
+
+  // event handler for search type select change
+  const handleSearchTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSearchType(event.target.value);
   };
 
   return (
@@ -82,12 +98,23 @@ export default function SearchField() {
         onChange={handleChange}
       />
 
+      <select
+        id='search-type'
+        value={searchType}
+        onChange={handleSearchTypeChange}
+      >
+        <option value='author'>Author</option>
+        <option value='book'>Book</option>
+      </select>
+
       <button onClick={handleSearch}>Search</button>
+
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          {searchResultsAuthors &&
+          {searchType === "author" &&
+            searchResultsAuthors &&
             searchResultsAuthors.docs &&
             searchResultsAuthors.docs.length > 0 && (
               <div>
@@ -95,9 +122,8 @@ export default function SearchField() {
                 <ul>
                   {searchResultsAuthors.docs.map((author: authorResult) => (
                     <li key={author.key}>
-                      <div>Name: {author.author_name}</div>
+                      <div>Name: {author.name}</div>
                       <div>Birth Date: {author.birth_date}</div>
-                      <div>Top Work: {author.top_work}</div>
                       <div>Type: {author.type}</div>
                     </li>
                   ))}
@@ -105,7 +131,8 @@ export default function SearchField() {
               </div>
             )}
 
-          {searchResultsBooks &&
+          {searchType === "book" &&
+            searchResultsBooks &&
             searchResultsBooks.docs &&
             searchResultsBooks.docs.length > 0 && (
               <div>
@@ -115,9 +142,10 @@ export default function SearchField() {
                     <li key={book.key}>
                       <div>Title: {book.title}</div>
                       <div>Author key: {book.author_key}</div>
-                      {/* <div>Name: {book.author_name}</div> */}
+                      <div>Name: {book.author_name}</div>
                       <div>Ebook: {book.ebook_access}</div>
                       <div>First publish year: {book.first_publish_year}</div>
+                      <div>Top Work: {book.top_work}</div>
                     </li>
                   ))}
                 </ul>
