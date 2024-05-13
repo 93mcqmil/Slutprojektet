@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import Books from "../Navbar/Books";
 import Favorites from "../Navbar/Favorites";
 import SearchField from "../Navbar/SearchField/SearchField";
+import { GlobalStateProvider } from "../../Globalstate";
 
 // ensuring HomePage component remains mounted
 // when navigating to the routes
@@ -14,9 +15,13 @@ const HomePage: React.FC = () => {
   ]);
   return (
     <>
-      <Navbar />
-      <SearchField />
-      <main>{routes}</main>
+      {" "}
+      <GlobalStateProvider>
+        <Navbar />
+        <SearchField />
+
+        <main>{routes}</main>
+      </GlobalStateProvider>
     </>
   );
 };

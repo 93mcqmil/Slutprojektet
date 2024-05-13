@@ -16,7 +16,7 @@ export default function Navbar() {
           <Link to={"/books"}>Books</Link>
         </li>
         <li>
-          <Link to={"/favourites"}>Favourites</Link>
+          <Link to={"/favorites"}>Favorites</Link>
         </li>
       </ul>
     </nav>

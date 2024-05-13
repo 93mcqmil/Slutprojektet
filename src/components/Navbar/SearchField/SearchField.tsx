@@ -8,6 +8,7 @@ import {
 import { GlobalStateContext } from "../../../Globalstate";
 
 export default function SearchField() {
+  const { addToFavorites } = useContext(GlobalStateContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("author"); // Default to searching for authors
   const [loading, setLoading] = useState(false);
@@ -87,6 +88,10 @@ export default function SearchField() {
     setSearchType(event.target.value);
   };
 
+  const handleAddToFavorites = (item: BookResult | authorResult) => {
+    addToFavorites(item);
+  };
+
   return (
     <>
       <label htmlFor='site-search'>Search the site:</label>
@@ -125,6 +130,9 @@ export default function SearchField() {
                       <div>Name: {author.name}</div>
                       <div>Birth Date: {author.birth_date}</div>
                       <div>Type: {author.type}</div>
+                      <button onClick={() => handleAddToFavorites(author)}>
+                        Add to Favorites
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -146,6 +154,9 @@ export default function SearchField() {
                       <div>Ebook: {book.ebook_access}</div>
                       <div>First publish year: {book.first_publish_year}</div>
                       <div>Top Work: {book.top_work}</div>
+                      <button onClick={() => handleAddToFavorites(book)}>
+                        Add to Favorites
+                      </button>
                     </li>
                   ))}
                 </ul>
