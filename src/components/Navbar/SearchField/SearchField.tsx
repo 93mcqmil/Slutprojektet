@@ -73,6 +73,7 @@ export default function SearchField() {
     updateSearchResultsBooks,
     updateSearchResultsAuthors,
   ]);
+  //Effect hook to fetch data when search term or search type changes
 
   const handleSearch = () => {
     setSearchClicked(true);

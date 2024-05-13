@@ -19,7 +19,6 @@ const HomePage: React.FC = () => {
       <GlobalStateProvider>
         <Navbar />
         <SearchField />
-
         <main>{routes}</main>
       </GlobalStateProvider>
     </>
