@@ -133,7 +133,10 @@ export default function SearchField() {
                     <li key={author.key}>
                       <div>Name: {author.name}</div>
                       <div>Birth Date: {author.birth_date}</div>
-                      <div>Type: {author.type}</div>
+                      <div>Death date: {author.death_date}</div>
+                      <div>Key: {author.key}</div>
+                      <div>Top subjects: {author.top_subjects}</div>
+                      <div>Top work: {author.top_work} </div>
                       <button onClick={() => handleAddToFavorites(author)}>
                         Add to Favorites
                       </button>
@@ -157,7 +160,7 @@ export default function SearchField() {
                       <div>Name: {book.author_name}</div>
                       <div>Ebook: {book.ebook_access}</div>
                       <div>First publish year: {book.first_publish_year}</div>
-                      <div>Top Work: {book.top_work}</div>
+                      <div>First sentence: {book.first_sentence}</div>
                       <button onClick={() => handleAddToFavorites(book)}>
                         Add to Favorites
                       </button>

@@ -20,15 +20,12 @@ export interface RouterError {
 /********************************* */
 export interface BookResult {
   key: string;
-  author_key: string;
-  author_name: string;
-  name: string;
   title: string;
+  author_key: number;
+  name: string;
   ebook_access: string;
   first_publish_year: number;
-  top_work: string;
-  type: string;
-  birth_date: number;
+  first_sentence: string;
 }
 export interface BookSearchResult {
   numFound: number;
@@ -38,16 +35,12 @@ export interface BookSearchResult {
 }
 /******************************* */
 export interface authorResult {
-  title: string;
-  top_work: string;
   name: string;
-  type: string;
-  key: string;
   birth_date: number;
-  author_key: number;
-  author_name: string;
-  ebook_access: string;
-  first_publish_year: number;
+  death_date: number;
+  key: number;
+  top_subjects: string;
+  top_work: string;
 }
 export interface authorSearchResult {
   numFound: number;
