@@ -19,6 +19,7 @@ export interface RouterError {
 }
 /********************************* */
 export interface BookResult {
+  author_name: string;
   key: string;
   title: string;
   author_key: number;
@@ -38,7 +39,7 @@ export interface authorResult {
   name: string;
   birth_date: number;
   death_date: number;
-  key: number;
+  key: string;
   top_subjects: string;
   top_work: string;
 }

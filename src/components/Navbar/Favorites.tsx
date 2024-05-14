@@ -6,7 +6,7 @@ import {
 } from "../../Globalstate";
 
 export default function Favorites() {
-  const { favorites } = useContext(GlobalStateContext);
+  const { favorites, removeFromFavorites } = useContext(GlobalStateContext);
 
   return (
     <div>
@@ -31,6 +31,9 @@ export default function Favorites() {
                 <div>Key: {(item as authorResult).key}</div>
                 <div>Top subjects: {item.top_subjects}</div>
                 <div>Top Work: {item.top_work}</div>
+                <button onClick={() => removeFromFavorites(item.key)}>
+                  Remove
+                </button>
               </div>
             )}
           </li>
