@@ -8,7 +8,7 @@ import {
 import { GlobalStateContext } from "../../../Globalstate";
 
 export default function SearchField() {
-  const { addToFavorites } = useContext(GlobalStateContext);
+  const { favorites, addToFavorites } = useContext(GlobalStateContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("author"); // Default to searching for authors
   const [loading, setLoading] = useState(false);
@@ -93,7 +93,12 @@ export default function SearchField() {
   };
 
   const handleAddToFavorites = (item: BookResult | authorResult) => {
-    addToFavorites(item);
+    // check if item exists in favorites
+    if (favorites.some((fav) => fav.key === item.key)) {
+      alert("Its already in your favorites!");
+    } else {
+      addToFavorites(item);
+    }
   };
 
   return (
