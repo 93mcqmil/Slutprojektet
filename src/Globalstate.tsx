@@ -46,6 +46,8 @@ export interface authorResult {
   birth_date: number;
   author_key: number;
   author_name: string;
+  ebook_access: string;
+  first_publish_year: number;
 }
 export interface authorSearchResult {
   numFound: number;

@@ -22,13 +22,13 @@ export default function SearchField() {
 
   //Effect hook to fetch data when search term or searh type changes
   useEffect(() => {
-    console.log("useEffect triggered");
     const fetchData = async () => {
       if (!searchClicked || searchTerm.trim() === "") {
         return;
       }
 
       setLoading(true);
+      setSearchClicked(false); //Reset searchClicked at the beginning of searchClicked to prevent endless loop
 
       try {
         let apiURL = "";
@@ -77,16 +77,19 @@ export default function SearchField() {
 
   const handleSearch = () => {
     setSearchClicked(true);
+    console.log("Search Clicked:", true);
   };
 
   //handler for search term input change
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+    console.log("Search Term changed:", event.target.value);
   };
 
   // event handler for search type select change
   const handleSearchTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSearchType(event.target.value);
+    console.log("Search Type Changed:", event.target.value);
   };
 
   const handleAddToFavorites = (item: BookResult | authorResult) => {
