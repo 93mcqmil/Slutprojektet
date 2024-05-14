@@ -6,6 +6,7 @@ import HomePage from "./components/Homepage/HomePage";
 import Books from "./components/Navbar/Books";
 import Favorites from "./components/Navbar/Favorites";
 import ErrorPage from "./error-page";
+import AuthorWorks from "./components/AuthorWorks/AuthorWorks";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/books", element: <Books /> },
       { path: "/favorites", element: <Favorites /> },
+      { path: "/author/:authorKey", element: <AuthorWorks /> },
     ],
   },
 ]);

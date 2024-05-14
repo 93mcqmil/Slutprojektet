@@ -6,6 +6,7 @@ import {
   BookSearchResult,
 } from "../../../Globalstate";
 import { GlobalStateContext } from "../../../Globalstate";
+import { Link } from "react-router-dom";
 
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
@@ -36,7 +37,7 @@ export default function SearchField() {
         if (searchType === "author") {
           apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=5`;
         } else {
-          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=1`;
+          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=5`;
         }
 
         //fetch data from api
@@ -136,7 +137,9 @@ export default function SearchField() {
                 <ul>
                   {searchResultsAuthors.docs.map((author: authorResult) => (
                     <li key={author.key}>
-                      <div>Name: {author.name}</div>
+                      Name:{" "}
+                      <Link to={`/author/${author.key}`}>{author.name}</Link>
+                      {/* <div>Name: {author.name}</div> */}
                       <div>Birth Date: {author.birth_date}</div>
                       <div>Death date: {author.death_date}</div>
                       <div>Key: {author.key}</div>
