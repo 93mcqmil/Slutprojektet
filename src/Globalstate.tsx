@@ -37,6 +37,7 @@ export interface BookSearchResult {
 }
 /******************************* */
 export interface authorResult {
+  cover_i: number;
   name: string;
   birth_date: number;
   death_date: number;

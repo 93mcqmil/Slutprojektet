@@ -16,6 +16,14 @@ export default function Favorites() {
           <li key={isBookResult(item) ? item.key : (item as authorResult).key}>
             {isBookResult(item) ? (
               <div>
+                {item.cover_i && (
+                  <div>
+                    <img
+                      src={`http://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`}
+                      alt={item.title}
+                    />
+                  </div>
+                )}
                 <div>Title: {item.title}</div>
                 <div>Author key: {item.author_key}</div>
                 <div>Name: {item.name}</div>

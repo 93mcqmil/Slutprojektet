@@ -139,7 +139,6 @@ export default function SearchField() {
                     <li key={author.key}>
                       Name:{" "}
                       <Link to={`/author/${author.key}`}>{author.name}</Link>
-                      {/* <div>Name: {author.name}</div> */}
                       <div>Birth Date: {author.birth_date}</div>
                       <div>Death date: {author.death_date}</div>
                       <div>Key: {author.key}</div>
@@ -163,7 +162,6 @@ export default function SearchField() {
                 <ul>
                   {searchResultsBooks.docs.map((book: BookResult) => (
                     <li key={book.key}>
-                      <div>Title: {book.title}</div>
                       {book.cover_i && (
                         <div>
                           <img
@@ -172,6 +170,7 @@ export default function SearchField() {
                           />
                         </div>
                       )}
+                      <div>Title: {book.title}</div>
                       <div>Author key: {book.author_key}</div>
                       <div>Name: {book.author_name}</div>
                       <div>Ebook: {book.ebook_access}</div>
