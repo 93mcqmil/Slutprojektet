@@ -164,6 +164,14 @@ export default function SearchField() {
                   {searchResultsBooks.docs.map((book: BookResult) => (
                     <li key={book.key}>
                       <div>Title: {book.title}</div>
+                      {book.cover_i && (
+                        <div>
+                          <img
+                            src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
+                            alt={book.title}
+                          />
+                        </div>
+                      )}
                       <div>Author key: {book.author_key}</div>
                       <div>Name: {book.author_name}</div>
                       <div>Ebook: {book.ebook_access}</div>

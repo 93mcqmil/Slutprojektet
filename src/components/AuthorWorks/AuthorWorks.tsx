@@ -17,7 +17,7 @@ const AuthorWorks = () => {
         }
         const data = await response.json();
         console.log("Author's works data:", data); // Log the fetched data
-        setWorks(data.entries);
+        setWorks(data.works);
       } catch (error: any) {
         console.error("Error fetching author's works:", error);
         setError(error.message);
@@ -36,7 +36,7 @@ const AuthorWorks = () => {
       <h1>Works by Author</h1>
       <ul>
         {works.map((work: any) => (
-          <li key={work.key}>{work.title}</li>
+          <li key={work.key}>{work.entries.title}</li>
         ))}
       </ul>
     </div>

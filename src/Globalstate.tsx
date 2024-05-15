@@ -19,6 +19,7 @@ export interface RouterError {
 }
 /********************************* */
 export interface BookResult {
+  cover_i: number;
   author_name: string;
   key: string;
   title: string;
