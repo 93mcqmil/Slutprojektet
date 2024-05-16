@@ -160,7 +160,7 @@ export default function SearchField() {
             searchResultsBooks.docs.length > 0 && (
               <div>
                 <h2>Books</h2>
-                <div className='flex flex-wrap -m-2'>
+                <div className='flex flex-wrap m-2'>
                   {searchResultsBooks.docs.map((book: BookResult) => (
                     <div
                       key={book.key}

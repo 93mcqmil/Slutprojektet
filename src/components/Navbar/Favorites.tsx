@@ -30,8 +30,11 @@ export default function Favorites() {
                 <div>Ebook: {item.ebook_access}</div>
                 <div>First publish year: {item.first_publish_year}</div>
                 <div>First sentence: {item.first_sentence}</div>
-                <button onClick={() => removeFromFavorites(item.key)}>
-                  Remove
+                <button
+                  className="'mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-blue-500'"
+                  onClick={() => removeFromFavorites(item.key)}
+                >
+                  remove
                 </button>
               </div>
             ) : (
