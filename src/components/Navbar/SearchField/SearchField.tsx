@@ -7,6 +7,7 @@ import {
 } from "../../../Globalstate";
 import { GlobalStateContext } from "../../../Globalstate";
 import { Link } from "react-router-dom";
+import BookCard from "../../Card/BookCard";
 
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
@@ -159,29 +160,16 @@ export default function SearchField() {
             searchResultsBooks.docs.length > 0 && (
               <div>
                 <h2>Books</h2>
-                <ul>
+                <div className='flex flex-wrap -m-2'>
                   {searchResultsBooks.docs.map((book: BookResult) => (
-                    <li key={book.key}>
-                      {book.cover_i && (
-                        <div>
-                          <img
-                            src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
-                            alt={book.title}
-                          />
-                        </div>
-                      )}
-                      <div>Title: {book.title}</div>
-                      <div>Author key: {book.author_key}</div>
-                      <div>Name: {book.author_name}</div>
-                      <div>Ebook: {book.ebook_access}</div>
-                      <div>First publish year: {book.first_publish_year}</div>
-                      <div>First sentence: {book.first_sentence}</div>
-                      <button onClick={() => handleAddToFavorites(book)}>
-                        Add to Favorites
-                      </button>
-                    </li>
+                    <div
+                      key={book.key}
+                      className='p-2 w-full md:w-1/2 lg:w-1/3'
+                    >
+                      <BookCard book={book} onAddToFavorites={addToFavorites} />
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
         </>

@@ -4,6 +4,7 @@ import Books from "../Navbar/Books";
 import Favorites from "../Navbar/Favorites";
 import SearchField from "../Navbar/SearchField/SearchField";
 import { GlobalStateProvider } from "../../Globalstate";
+import "tailwindcss/tailwind.css";
 
 // ensuring HomePage component remains mounted
 // when navigating to the routes
