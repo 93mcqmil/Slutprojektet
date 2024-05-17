@@ -4,15 +4,10 @@ import {
   BookResult,
   authorResult,
 } from "../../Globalstate";
-import BookCard from "../Card/BookCard";
+import BookCardFavorites from "../Card/BookCardFavorites";
 
 export default function Favorites() {
-  const { favorites, addToFavorites, removeFromFavorites } =
-    useContext(GlobalStateContext);
-
-  const isFavorite = (book: BookResult) => {
-    return favorites.some((fav) => fav.key === book.key);
-  };
+  const { favorites, removeFromFavorites } = useContext(GlobalStateContext);
 
   return (
     <div>
@@ -21,28 +16,14 @@ export default function Favorites() {
         {favorites.map((item) => (
           <li key={isBookResult(item) ? item.key : (item as authorResult).key}>
             {isBookResult(item) ? (
-              <div>
-                <div key={item.key} className='p-2 w-full md:w-1/2 lg:w-1/3'>
-                  <BookCard
-                    book={item}
-                    isFavorite={true}
-                    onAddToFavorites={addToFavorites}
-                    onRemoveFromFavorites={removeFromFavorites}
-                  />
-                </div>
+              <div key={item.key} className='p-2 w-full md:w-1/2 lg:w-1/3'>
+                <BookCardFavorites
+                  book={item}
+                  onRemoveFromFavorites={removeFromFavorites}
+                />
               </div>
             ) : (
-              <div>
-                <div>Name: {item.name}</div>
-                <div>birth date: {item.birth_date}</div>
-                <div>death date: {item.death_date}</div>
-                <div>Key: {(item as authorResult).key}</div>
-                <div>Top subjects: {item.top_subjects}</div>
-                <div>Top Work: {item.top_work}</div>
-                <button onClick={() => removeFromFavorites(item)}>
-                  Remove
-                </button>
-              </div>
+              <div></div>
             )}
           </li>
         ))}

@@ -7,7 +7,8 @@ import {
 } from "../../../Globalstate";
 import { GlobalStateContext } from "../../../Globalstate";
 import { Link } from "react-router-dom";
-import BookCard from "../../Card/BookCard";
+
+import BookCardSearch from "../../Card/BookCardSearch";
 
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
@@ -165,7 +166,10 @@ export default function SearchField() {
                       key={book.key}
                       className='p-2 w-full md:w-1/2 lg:w-1/3'
                     >
-                      <BookCard book={book} onAddToFavorites={addToFavorites} />
+                      <BookCardSearch
+                        book={book}
+                        onAddToFavorites={handleAddToFavorites}
+                      />
                     </div>
                   ))}
                 </div>
