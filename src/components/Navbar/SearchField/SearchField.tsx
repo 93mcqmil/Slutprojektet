@@ -39,7 +39,7 @@ export default function SearchField() {
         if (searchType === "author") {
           apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=5`;
         } else {
-          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=5`;
+          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=10`;
         }
 
         //fetch data from api
@@ -105,7 +105,42 @@ export default function SearchField() {
 
   return (
     <>
-      <label htmlFor='site-search'>Search the site:</label>
+      <div className='max-w-md mx-auto'>
+        <label
+          htmlFor='site-search'
+          className='mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white'
+        >
+          Search the site:
+        </label>
+        <div className='relative flex'>
+          <input
+            type='search'
+            id='site-search'
+            name='q'
+            value={searchTerm}
+            onChange={handleChange}
+            className='block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            placeholder='Search the site...'
+          />
+          <select
+            id='search-type'
+            value={searchType}
+            onChange={handleSearchTypeChange}
+            className='ml-2 bg-white border border-gray-300 rounded-md py-1 px-2 text-gray-900 focus:outline-none focus:ring focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500'
+          >
+            <option value='author'>Author</option>
+            <option value='book'>Book</option>
+          </select>
+          <button
+            onClick={handleSearch}
+            className='ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+          >
+            Search
+          </button>
+        </div>
+      </div>
+
+      {/* <label htmlFor='site-search'>Search the site:</label>
       <input
         type='search'
         id='site-search'
@@ -123,7 +158,7 @@ export default function SearchField() {
         <option value='book'>Book</option>
       </select>
 
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch}>Search</button> */}
 
       {loading ? (
         <p>Loading...</p>
