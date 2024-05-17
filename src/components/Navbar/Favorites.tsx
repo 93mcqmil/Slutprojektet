@@ -4,9 +4,11 @@ import {
   BookResult,
   authorResult,
 } from "../../Globalstate";
+import BookCard from "../Card/BookCard";
 
 export default function Favorites() {
-  const { favorites, removeFromFavorites } = useContext(GlobalStateContext);
+  const { favorites, addToFavorites, removeFromFavorites } =
+    useContext(GlobalStateContext);
 
   return (
     <div>
@@ -16,26 +18,9 @@ export default function Favorites() {
           <li key={isBookResult(item) ? item.key : (item as authorResult).key}>
             {isBookResult(item) ? (
               <div>
-                {item.cover_i && (
-                  <div>
-                    <img
-                      src={`http://covers.openlibrary.org/b/id/${item.cover_i}-M.jpg`}
-                      alt={item.title}
-                    />
-                  </div>
-                )}
-                <div>Title: {item.title}</div>
-                <div>Author key: {item.author_key}</div>
-                <div>Name: {item.name}</div>
-                <div>Ebook: {item.ebook_access}</div>
-                <div>First publish year: {item.first_publish_year}</div>
-                <div>First sentence: {item.first_sentence}</div>
-                <button
-                  className="'mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-blue-500'"
-                  onClick={() => removeFromFavorites(item.key)}
-                >
-                  remove
-                </button>
+                <div key={item.key} className='p-2 w-full md:w-1/2 lg:w-1/3'>
+                  <BookCard book={item} onAddToFavorites={addToFavorites} />
+                </div>
               </div>
             ) : (
               <div>
