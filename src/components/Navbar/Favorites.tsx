@@ -10,6 +10,10 @@ export default function Favorites() {
   const { favorites, addToFavorites, removeFromFavorites } =
     useContext(GlobalStateContext);
 
+  const isFavorite = (book: BookResult) => {
+    return favorites.some((fav) => fav.key === book.key);
+  };
+
   return (
     <div>
       <h1>Favorite Items</h1>
@@ -19,7 +23,12 @@ export default function Favorites() {
             {isBookResult(item) ? (
               <div>
                 <div key={item.key} className='p-2 w-full md:w-1/2 lg:w-1/3'>
-                  <BookCard book={item} onAddToFavorites={addToFavorites} />
+                  <BookCard
+                    book={item}
+                    isFavorite={true}
+                    onAddToFavorites={addToFavorites}
+                    onRemoveFromFavorites={removeFromFavorites}
+                  />
                 </div>
               </div>
             ) : (
@@ -30,7 +39,7 @@ export default function Favorites() {
                 <div>Key: {(item as authorResult).key}</div>
                 <div>Top subjects: {item.top_subjects}</div>
                 <div>Top Work: {item.top_work}</div>
-                <button onClick={() => removeFromFavorites(item.key)}>
+                <button onClick={() => removeFromFavorites(item)}>
                   Remove
                 </button>
               </div>

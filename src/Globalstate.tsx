@@ -6,7 +6,7 @@ export type GlobalState = {
   bookResults: BookResult[];
   favorites: (BookResult | authorResult)[];
   addToFavorites: (item: BookResult | authorResult) => void;
-  removeFromFavorites: (key: string) => void;
+  removeFromFavorites: (item: BookResult | authorResult) => void;
   authorResults: authorResult[];
   updateSearchResultsBooks: (newBooks: BookResult[]) => void; //add the update function here
   updateSearchResultsAuthors: (newAuthors: authorResult[]) => void;
@@ -90,9 +90,9 @@ export const GlobalStateProvider: React.FC<{ children: React.ReactNode }> = ({
     authorResults,
     addToFavorites: (item) =>
       setFavorites((prevFavorites) => [...prevFavorites, item]),
-    removeFromFavorites: (key) =>
+    removeFromFavorites: (itemToRemove) =>
       setFavorites((prevFavorites) =>
-        prevFavorites.filter((item) => item.key !== key)
+        prevFavorites.filter((item) => item !== itemToRemove)
       ),
     updateSearchResultsBooks,
     updateSearchResultsAuthors,
