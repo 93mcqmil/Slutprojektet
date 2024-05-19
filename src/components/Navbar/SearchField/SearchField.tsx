@@ -35,7 +35,7 @@ export default function SearchField() {
 
       try {
         let apiURL = "";
-        // construct API url based on search type
+        // API url based on search type
         if (searchType === "author") {
           apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=10`;
         } else {
@@ -55,10 +55,8 @@ export default function SearchField() {
         //update state based on search type
         if (searchType === "author") {
           setSearchResultsAuthors(searchData);
-          console.log("Authors Data:", searchData.docs);
         } else {
           setSearchResultsBooks(searchData);
-          console.log("Books Data:", searchData);
           updateSearchResultsBooks(searchData.docs);
         }
       } catch (error) {
@@ -79,19 +77,16 @@ export default function SearchField() {
 
   const handleSearch = () => {
     setSearchClicked(true);
-    console.log("Search Clicked:", true);
   };
 
   //handler for search term input change
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-    console.log("Search Term changed:", event.target.value);
   };
 
   // event handler for search type select change
   const handleSearchTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setSearchType(event.target.value);
-    console.log("Search Type Changed:", event.target.value);
   };
 
   const handleAddToFavorites = (item: BookResult | authorResult) => {

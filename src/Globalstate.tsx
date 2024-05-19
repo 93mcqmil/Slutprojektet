@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import Books from "./components/Navbar/About";
 
 // define type for global state
 export type GlobalState = {
@@ -12,11 +11,6 @@ export type GlobalState = {
   updateSearchResultsAuthors: (newAuthors: authorResult[]) => void;
 };
 
-/*********************************** */
-export interface RouterError {
-  code: number;
-  message: string;
-}
 /********************************* */
 export interface BookResult {
   cover_i: string;
@@ -54,13 +48,13 @@ export interface authorSearchResult {
 
 // create global state context to keep track of books
 export const GlobalStateContext = createContext<GlobalState>({
-  bookResults: [], // array of books from api
-  favorites: [], // array of favorite books
-  authorResults: [],
-  updateSearchResultsBooks: () => {},
-  updateSearchResultsAuthors: () => {},
-  addToFavorites: () => {}, // Dummy function
-  removeFromFavorites: () => {}, // Dummy function
+  bookResults: [], // Array to store search results for books
+  favorites: [], // Array to store search results for authors
+  authorResults: [], // Array to store favorite books and authors
+  updateSearchResultsBooks: () => {}, // Function to update the book search results
+  updateSearchResultsAuthors: () => {}, // Function to update the author search results
+  addToFavorites: () => {}, // Function to add an item to favorites
+  removeFromFavorites: () => {}, // Function to remove an item from favorites
 });
 
 //create global state provider component
@@ -80,9 +74,7 @@ export const GlobalStateProvider: React.FC<{ children: React.ReactNode }> = ({
   };
   const [favorites, setFavorites] = useState<(BookResult | authorResult)[]>([]);
 
-  useEffect(() => {
-    console.log("Favorites changed:", favorites);
-  }, [favorites]); // Log favorites whenever it changes
+  useEffect(() => {}, [favorites]); // Log favorites whenever it changes
 
   const value: GlobalState = {
     bookResults,
