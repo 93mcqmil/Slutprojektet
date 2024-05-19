@@ -5,6 +5,7 @@ import {
   authorResult,
 } from "../../Globalstate";
 import BookCardFavorites from "../Card/CardBookFavorites.tsx";
+import AuthorCardFavorites from "../Card/CardAuthorFavorite.tsx";
 
 export default function Favorites() {
   const { favorites, removeFromFavorites } = useContext(GlobalStateContext);
@@ -23,7 +24,12 @@ export default function Favorites() {
                 />
               </div>
             ) : (
-              <div></div>
+              <div key={item.key} className='p-2 w-full md:w-1/2 lg:w-1/3'>
+                <AuthorCardFavorites
+                  author={item}
+                  onRemoveFromFavorites={removeFromFavorites}
+                />
+              </div>
             )}
           </li>
         ))}

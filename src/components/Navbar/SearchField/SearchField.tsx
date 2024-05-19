@@ -6,7 +6,6 @@ import {
   BookSearchResult,
 } from "../../../Globalstate";
 import { GlobalStateContext } from "../../../Globalstate";
-import { Link } from "react-router-dom";
 
 import BookCardSearch from "../../Card/CardBookSearch";
 import AuthorCardSearch from "../../Card/CardAuthorSearch";
@@ -38,7 +37,7 @@ export default function SearchField() {
         let apiURL = "";
         // construct API url based on search type
         if (searchType === "author") {
-          apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=5`;
+          apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=10`;
         } else {
           apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=10`;
         }
@@ -151,26 +150,19 @@ export default function SearchField() {
             searchResultsAuthors.docs.length > 0 && (
               <div>
                 <h2>Authors</h2>
-                <ul>
+                <div className='flex flex-wrap m-2'>
                   {searchResultsAuthors.docs.map((author: authorResult) => (
-                    <li key={author.key}>
+                    <div
+                      key={author.key}
+                      className='p-2 w-full md:w-1/2 lg:w-1/3'
+                    >
                       <AuthorCardSearch
                         author={author}
                         onAddToFavorites={handleAddToFavorites}
                       />
-                      {/* Name:{" "}
-                      <Link to={`/author/${author.key}`}>{author.name}</Link>
-                      <div>Birth Date: {author.birth_date}</div>
-                      <div>Death date: {author.death_date}</div>
-                      <div>Key: {author.key}</div>
-                      <div>Top subjects: {author.top_subjects}</div>
-                      <div>Top work: {author.top_work} </div>
-                      <button onClick={() => handleAddToFavorites(author)}>
-                        Add to Favorites
-                      </button> */}
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
 

@@ -19,7 +19,7 @@ export interface RouterError {
 }
 /********************************* */
 export interface BookResult {
-  cover_i: number;
+  cover_i: string;
   author_name: string;
   key: string;
   title: string;
@@ -37,7 +37,7 @@ export interface BookSearchResult {
 }
 /******************************* */
 export interface authorResult {
-  cover_i: number;
+  cover_i: string;
   name: string;
   birth_date: number;
   death_date: number;
