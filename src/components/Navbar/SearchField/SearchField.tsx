@@ -13,7 +13,7 @@ import AuthorCardSearch from "../../Card/CardAuthorSearch";
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("author"); // Default to searching for authors
+  const [searchType, setSearchType] = useState("author"); // Default searching for authors
   const [loading, setLoading] = useState(false);
   const [searchResultsAuthors, setSearchResultsAuthors] =
     useState<authorSearchResult | null>(null);

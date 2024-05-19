@@ -25,7 +25,7 @@ const AuthorCardFavorites: React.FC<AuthorCardFavoritesProps> = ({
       {author.cover_i && (
         <img
           className='object-cover w-full rounded-t-lg h-85 md:w-48 md:rounded-none md:rounded-l-lg'
-          src={`https://covers.openlibrary.org/a/olid/${author.cover_i}-M.jpg`}
+          src={`https://covers.openlibrary.org/a/olid/${author.cover_i}-L.jpg`}
           alt={author.name}
         />
       )}

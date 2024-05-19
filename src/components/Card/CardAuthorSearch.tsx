@@ -11,9 +11,11 @@ const AuthorCardSearch: React.FC<AuthorCardProps> = ({
   onAddToFavorites,
 }) => {
   const [truncateText, setTruncate] = useState(true);
+  const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
 
   const handleAddToFavorites = () => {
     onAddToFavorites(author);
+    setIsAddedToFavorites(true);
   };
 
   return (
@@ -25,7 +27,7 @@ const AuthorCardSearch: React.FC<AuthorCardProps> = ({
       {author.cover_i && (
         <img
           className='object-cover w-full rounded-t-lg h-85 md:w-48 md:rounded-none md:rounded-l-lg'
-          src={`https://covers.openlibrary.org/a/olid/${author.cover_i}-M.jpg`}
+          src={`https://covers.openlibrary.org/a/olid/${author.cover_i}-L.jpg`}
           alt={author.name}
         />
       )}
@@ -53,12 +55,16 @@ const AuthorCardSearch: React.FC<AuthorCardProps> = ({
             {author.top_work}
           </div>
         </div>
-        <button
-          className='mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700'
-          onClick={handleAddToFavorites}
-        >
-          Add to Favorites
-        </button>
+        {!isAddedToFavorites ? (
+          <button
+            className='mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
+            onClick={handleAddToFavorites}
+          >
+            Add to Favorites
+          </button>
+        ) : (
+          <span className='text-green-500 text-2xl'>✔️</span>
+        )}
       </div>
     </div>
   );
