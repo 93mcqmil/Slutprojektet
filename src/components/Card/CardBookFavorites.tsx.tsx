@@ -3,18 +3,18 @@ import { BookResult } from "../../Globalstate";
 
 interface BookCardProps {
   book: BookResult;
-  isFavorite: boolean;
-  onAddToFavorites: (item: BookResult) => void;
   onRemoveFromFavorites: (item: BookResult) => void;
 }
 
-const BookCard: React.FC<BookCardProps> = ({
+const BookCardFavorites: React.FC<BookCardProps> = ({
   book,
-  isFavorite,
-  onAddToFavorites,
   onRemoveFromFavorites,
 }) => {
   const [truncateText, setTruncate] = useState(true);
+
+  const handleRemoveFromFavorites = () => {
+    onRemoveFromFavorites(book);
+  };
 
   return (
     <div
@@ -34,38 +34,34 @@ const BookCard: React.FC<BookCardProps> = ({
           <h5 className='mb-2 text-2x1 font-bold tracking-tight text-gray-900 dark:text-white'>
             {book.title}
           </h5>
-          <div>Author key: {book.author_key}</div>
-          <div>Name: {book.author_name}</div>
-          <div>Ebook: {book.ebook_access}</div>
-          <div>First publish year: {book.first_publish_year}</div>
+          <span className='font-semibold'>Author key: </span>
+          {book.author_key}
+          <div>
+            <span className='font-semibold'>Name: </span>
+            {book.author_name}
+          </div>
+          <div>
+            <span className='font-semibold'>Ebook: </span>
+            {book.ebook_access}
+          </div>
+          <div>
+            <span className='font-semibold'>First publish: </span>
+            {book.first_publish_year}
+          </div>
           <div className={truncateText ? "truncate" : ""}>
-            First sentence: {book.first_sentence}
+            <span className='font-semibold'>First sentence: </span>
+            {book.author_name}
           </div>
         </div>
-        {isFavorite ? (
-          <button
-            className='mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700'
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent card click event from toggling truncation
-              onRemoveFromFavorites(book);
-            }}
-          >
-            Remove from Favorites
-          </button>
-        ) : (
-          <button
-            className='mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent card click event from toggling truncation
-              onAddToFavorites(book);
-            }}
-          >
-            Add to Favorites
-          </button>
-        )}
+        <button
+          className='mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700'
+          onClick={handleRemoveFromFavorites}
+        >
+          Remove from Favorites
+        </button>
       </div>
     </div>
   );
 };
 
-export default BookCard;
+export default BookCardFavorites;

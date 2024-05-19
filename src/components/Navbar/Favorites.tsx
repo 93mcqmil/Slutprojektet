@@ -4,53 +4,39 @@ import {
   BookResult,
   authorResult,
 } from "../../Globalstate";
-import BookCard from "../Card/BookCard";
+import BookCardFavorites from "../Card/CardBookFavorites.tsx";
+import AuthorCardFavorites from "../Card/CardAuthorFavorite.tsx";
 
 export default function Favorites() {
-  const { favorites, addToFavorites, removeFromFavorites } =
-    useContext(GlobalStateContext);
-
-  const isFavorite = (book: BookResult) => {
-    return favorites.some((fav) => fav.key === book.key);
-  };
+  const { favorites, removeFromFavorites } = useContext(GlobalStateContext);
 
   return (
     <div>
-      <h1>Favorite Items</h1>
-      <ul>
+      <h1 className='text-2xl font-bold mb-4'>Favorite Items</h1>
+      <div className='flex flex-wrap -mx-2'>
         {favorites.map((item) => (
-          <li key={isBookResult(item) ? item.key : (item as authorResult).key}>
+          <div
+            key={isBookResult(item) ? item.key : (item as authorResult).key}
+            className='p-2 w-full md:w-1/2 lg:w-1/3'
+          >
             {isBookResult(item) ? (
-              <div>
-                <div key={item.key} className='p-2 w-full md:w-1/2 lg:w-1/3'>
-                  <BookCard
-                    book={item}
-                    isFavorite={true}
-                    onAddToFavorites={addToFavorites}
-                    onRemoveFromFavorites={removeFromFavorites}
-                  />
-                </div>
-              </div>
+              <BookCardFavorites
+                book={item}
+                onRemoveFromFavorites={removeFromFavorites}
+              />
             ) : (
-              <div>
-                <div>Name: {item.name}</div>
-                <div>birth date: {item.birth_date}</div>
-                <div>death date: {item.death_date}</div>
-                <div>Key: {(item as authorResult).key}</div>
-                <div>Top subjects: {item.top_subjects}</div>
-                <div>Top Work: {item.top_work}</div>
-                <button onClick={() => removeFromFavorites(item)}>
-                  Remove
-                </button>
-              </div>
+              <AuthorCardFavorites
+                author={item}
+                onRemoveFromFavorites={removeFromFavorites}
+              />
             )}
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 
-  // Define a type guard function to check if an item is a BookResult/and accepts objects of type bookresults or authorresults
+  // Define a type guard function to check if an item is a BookResult
   function isBookResult(item: BookResult | authorResult): item is BookResult {
     return "title" in item;
   }

@@ -1,25 +1,24 @@
 import { useRoutes } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import Books from "../Navbar/Books";
 import Favorites from "../Navbar/Favorites";
-import SearchField from "../Navbar/SearchField/SearchField";
 import { GlobalStateProvider } from "../../Globalstate";
 import "tailwindcss/tailwind.css";
+import { HomePageContent } from "./HomePageContent";
+import About from "../Navbar/About";
 
-// ensuring HomePage component remains mounted
-// when navigating to the routes
+// HomePage component
 const HomePage: React.FC = () => {
   // Hook to match current url path with defined routes
   const routes = useRoutes([
-    { path: "/books", element: <Books /> },
+    { path: "/", element: <HomePageContent /> },
+    { path: "/about", element: <About /> },
     { path: "/favorites", element: <Favorites /> },
   ]);
+
   return (
     <>
-      {" "}
       <GlobalStateProvider>
         <Navbar />
-        <SearchField />
         <main>{routes}</main>
       </GlobalStateProvider>
     </>
