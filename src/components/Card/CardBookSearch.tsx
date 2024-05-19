@@ -52,7 +52,7 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
             {book.first_publish_year}
           </div>
           <div className={truncateText ? "truncate" : ""}>
-            <span className='font-semibold'>First Publish: </span>
+            <span className='font-semibold'>First sentence: </span>
             {book.first_sentence}
           </div>
         </div>
