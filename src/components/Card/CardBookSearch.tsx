@@ -34,12 +34,24 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
           <h5 className='mb-2 text-2x1 font-bold tracking-tight text-gray-900 dark:text-white'>
             {book.title}
           </h5>
-          <div>Author key: {book.author_key}</div>
-          <div>Name: {book.author_name}</div>
-          <div>Ebook: {book.ebook_access}</div>
-          <div>First publish year: {book.first_publish_year}</div>
+          <div>
+            <span className='font-semibold'>Author key:</span> {book.author_key}
+          </div>
+          <div>
+            <span className='font-semibold'>Name: </span>
+            {book.author_name}
+          </div>
+          <div>
+            <span className='font-semibold'>Ebook: </span>
+            {book.ebook_access}
+          </div>
+          <div>
+            <span className='font-semibold'>First Publish: </span>
+            {book.first_publish_year}
+          </div>
           <div className={truncateText ? "truncate" : ""}>
-            First sentence: {book.first_sentence}
+            <span className='font-semibold'>First Publish: </span>
+            {book.first_sentence}
           </div>
         </div>
         <button

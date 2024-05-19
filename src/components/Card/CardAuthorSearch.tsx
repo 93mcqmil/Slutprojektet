@@ -34,13 +34,24 @@ const AuthorCardSearch: React.FC<AuthorCardProps> = ({
           <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
             {author.name}
           </h5>
-          <div>Birth Date: {author.birth_date}</div>
-          <div>Death Date: {author.death_date}</div>
-          <div>Top Subjects: {author.top_subjects}</div>
-          <div className={truncateText ? "truncate" : ""}>
-            First sentence: {author.top_subjects}
+          <div>
+            <span className='font-semibold'>Birth date: </span>
+            {author.birth_date}
           </div>
-          <div>Top Work: {author.top_work}</div>
+
+          <div>
+            <span className='font-semibold'>Death date: </span>
+            {author.death_date}
+          </div>
+
+          <div className={truncateText ? "truncate" : ""}>
+            <span className='font-semibold'>Top subjects: </span>
+            {author.top_subjects}
+          </div>
+          <div>
+            <span className='font-semibold'>Top work: </span>
+            {author.top_work}
+          </div>
         </div>
         <button
           className='mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700'

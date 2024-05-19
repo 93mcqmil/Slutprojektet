@@ -34,12 +34,25 @@ const AuthorCardFavorites: React.FC<AuthorCardFavoritesProps> = ({
           <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
             {author.name}
           </h5>
-          <div>Birth Date: {author.birth_date}</div>
-          <div>Death Date: {author.death_date}</div>
-          <div>Top Subjects: {author.top_subjects}</div>
-          <div>Top Work: {author.top_work}</div>
+          <div>
+            <span className='font-semibold'>Birth date: </span>
+            {author.birth_date}
+          </div>
+          <div>
+            <span className='font-semibold'>Death date: </span>
+            {author.death_date}
+          </div>
+          <div>
+            <span className='font-semibold'>Top subjects: </span>
+            {author.top_subjects}
+          </div>
+          <div>
+            <span className='font-semibold'>Top work: </span>
+            {author.top_work}
+          </div>
           <div className={truncateText ? "truncate" : ""}>
-            First sentence: {author.top_work}
+            <span className='font-semibold'>First sentence: </span>
+            {author.top_subjects}
           </div>
         </div>
         <button
