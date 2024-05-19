@@ -8,7 +8,8 @@ import {
 import { GlobalStateContext } from "../../../Globalstate";
 import { Link } from "react-router-dom";
 
-import BookCardSearch from "../../Card/BookCardSearch";
+import BookCardSearch from "../../Card/CardBookSearch";
+import AuthorCardSearch from "../../Card/CardAuthorSearch";
 
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
@@ -140,26 +141,6 @@ export default function SearchField() {
         </div>
       </div>
 
-      {/* <label htmlFor='site-search'>Search the site:</label>
-      <input
-        type='search'
-        id='site-search'
-        name='q'
-        value={searchTerm}
-        onChange={handleChange}
-      />
-
-      <select
-        id='search-type'
-        value={searchType}
-        onChange={handleSearchTypeChange}
-      >
-        <option value='author'>Author</option>
-        <option value='book'>Book</option>
-      </select>
-
-      <button onClick={handleSearch}>Search</button> */}
-
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -173,7 +154,11 @@ export default function SearchField() {
                 <ul>
                   {searchResultsAuthors.docs.map((author: authorResult) => (
                     <li key={author.key}>
-                      Name:{" "}
+                      <AuthorCardSearch
+                        author={author}
+                        onAddToFavorites={handleAddToFavorites}
+                      />
+                      {/* Name:{" "}
                       <Link to={`/author/${author.key}`}>{author.name}</Link>
                       <div>Birth Date: {author.birth_date}</div>
                       <div>Death date: {author.death_date}</div>
@@ -182,7 +167,7 @@ export default function SearchField() {
                       <div>Top work: {author.top_work} </div>
                       <button onClick={() => handleAddToFavorites(author)}>
                         Add to Favorites
-                      </button>
+                      </button> */}
                     </li>
                   ))}
                 </ul>

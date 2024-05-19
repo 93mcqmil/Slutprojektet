@@ -4,7 +4,7 @@ import {
   BookResult,
   authorResult,
 } from "../../Globalstate";
-import BookCardFavorites from "../Card/BookCardFavorites";
+import BookCardFavorites from "../Card/CardBookFavorites.tsx";
 
 export default function Favorites() {
   const { favorites, removeFromFavorites } = useContext(GlobalStateContext);
