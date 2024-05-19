@@ -37,10 +37,10 @@ const AuthorCardSearch: React.FC<AuthorCardProps> = ({
           <div>Birth Date: {author.birth_date}</div>
           <div>Death Date: {author.death_date}</div>
           <div>Top Subjects: {author.top_subjects}</div>
-          <div>Top Work: {author.top_work}</div>
           <div className={truncateText ? "truncate" : ""}>
-            First sentence: {author.top_work}
+            First sentence: {author.top_subjects}
           </div>
+          <div>Top Work: {author.top_work}</div>
         </div>
         <button
           className='mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700'
