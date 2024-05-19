@@ -11,9 +11,11 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
   onAddToFavorites,
 }) => {
   const [truncateText, setTruncate] = useState(true);
+  const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
 
   const handleAddToFavorites = () => {
     onAddToFavorites(book);
+    setIsAddedToFavorites(true);
   };
 
   return (
@@ -54,12 +56,16 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
             {book.first_sentence}
           </div>
         </div>
-        <button
-          className='mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
-          onClick={handleAddToFavorites}
-        >
-          Add to Favorites
-        </button>
+        {!isAddedToFavorites ? (
+          <button
+            className='mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
+            onClick={handleAddToFavorites}
+          >
+            Add to Favorites
+          </button>
+        ) : (
+          <span className='text-green-500 text-2xl'>✔️</span>
+        )}
       </div>
     </div>
   );
