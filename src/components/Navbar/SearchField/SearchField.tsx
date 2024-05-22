@@ -1,15 +1,13 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import {
-  authorResult,
-  authorSearchResult,
-  BookResult,
-  BookSearchResult,
-} from "../../../Globalstate";
 import { GlobalStateContext } from "../../../Globalstate";
-
 import BookCardSearch from "../../Card/CardBookSearch";
 import AuthorCardSearch from "../../Card/CardAuthorSearch";
-
+import {
+  BookResult,
+  BookSearchResult,
+  authorResult,
+  authorSearchResult,
+} from "../../Interface/Interface";
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
   const [searchTerm, setSearchTerm] = useState("");
