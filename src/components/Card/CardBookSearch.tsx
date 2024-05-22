@@ -1,21 +1,36 @@
 import React, { useState } from "react";
-import { BookResult } from "../../Globalstate";
-
+import { BookResult } from "../Interface/Interface";
+//interface to include functions
 interface BookCardSearchProps {
   book: BookResult;
   onAddToFavorites: (item: BookResult) => void;
+  onAddToReadBooks: (item: BookResult) => void;
+  onSubmitReview: (book: BookResult, review: string) => void;
 }
 
 const BookCardSearch: React.FC<BookCardSearchProps> = ({
   book,
   onAddToFavorites,
+  onAddToReadBooks,
+  onSubmitReview,
 }) => {
   const [truncateText, setTruncate] = useState(true);
   const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
+  const [isAddedtoReadBooks, setIsAdded] = useState(false);
+  const [reviewText, setReviewText] = useState("");
 
   const handleAddToFavorites = () => {
     onAddToFavorites(book);
     setIsAddedToFavorites(true);
+  };
+  const handleAddToReadBooks = () => {
+    onAddToReadBooks(book);
+    setIsAdded(true);
+  };
+  const handleReviewSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSubmitReview(book, reviewText);
+    setReviewText("");
   };
 
   return (
@@ -66,7 +81,29 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
         ) : (
           <span className='text-green-500 text-2xl'>✔️</span>
         )}
+        Add to read book:
+        {!isAddedtoReadBooks ? (
+          <button className='border: ' onClick={handleAddToReadBooks}>
+            +
+          </button>
+        ) : (
+          <span className='text-green-500 text-2xl'>✔️</span>
+        )}
       </div>
+      {/* <form onSubmit={handleReviewSubmit} className='mt-4'>
+        <textarea
+          className='w-full p-2 border border-gray-300 rounded'
+          placeholder='Write your review here...'
+          value={reviewText}
+          onChange={(e) => setReviewText(e.target.value)}
+        />
+        <button
+          type='submit'
+          className='mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700'
+        >
+          Submit
+        </button>
+      </form> */}
     </div>
   );
 };
