@@ -107,6 +107,9 @@ export default function SearchField() {
     }
   };
 
+  const handleReviewSubmit = (book: BookResult, review: string) => {
+    console.log(`Review for ${book.title}: ${review}`);
+  };
   return (
     <>
       <div className='max-w-md mx-auto'>
@@ -186,6 +189,7 @@ export default function SearchField() {
                         book={book}
                         onAddToFavorites={handleAddToFavorites}
                         onAddToReadBooks={handleAddToReadBooks}
+                        onSubmitReview={handleReviewSubmit}
                       />
                     </div>
                   ))}
