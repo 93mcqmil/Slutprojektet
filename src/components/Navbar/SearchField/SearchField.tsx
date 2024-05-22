@@ -8,6 +8,8 @@ import {
   authorResult,
   authorSearchResult,
 } from "../../Interface/Interface";
+//*************************************************************************** */
+
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
   const [searchTerm, setSearchTerm] = useState("");

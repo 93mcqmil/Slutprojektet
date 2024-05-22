@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BookResult } from "../../Globalstate";
+import { BookResult } from "../Interface/Interface";
 
 interface BookCardProps {
   book: BookResult;
