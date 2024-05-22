@@ -2,6 +2,7 @@ import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { GlobalStateContext } from "../../../Globalstate";
 import BookCardSearch from "../../Card/CardBookSearch";
 import AuthorCardSearch from "../../Card/CardAuthorSearch";
+
 import {
   BookResult,
   BookSearchResult,
@@ -12,6 +13,7 @@ import {
 
 export default function SearchField() {
   const { favorites, addToFavorites } = useContext(GlobalStateContext);
+  const { readBooks, addToReadBooks } = useContext(GlobalStateContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("author"); // Default searching for authors
   const [loading, setLoading] = useState(false);
@@ -97,6 +99,13 @@ export default function SearchField() {
       addToFavorites(item);
     }
   };
+  const handleAddToReadBooks = (item: BookResult) => {
+    if (readBooks.some((book) => book.key === item.key)) {
+      alert("Its already added my friend!");
+    } else {
+      addToReadBooks(item);
+    }
+  };
 
   return (
     <>
@@ -176,6 +185,7 @@ export default function SearchField() {
                       <BookCardSearch
                         book={book}
                         onAddToFavorites={handleAddToFavorites}
+                        onAddToReadBooks={handleAddToReadBooks}
                       />
                     </div>
                   ))}

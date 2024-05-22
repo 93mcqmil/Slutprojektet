@@ -1,28 +1,19 @@
 import React, { useState } from "react";
 import { BookResult } from "../Interface/Interface";
 
-interface BookCardSearchProps {
+interface BookCardProps {
   book: BookResult;
-  onAddToFavorites: (item: BookResult) => void;
-  onAddToReadBooks: (item: BookResult) => void;
+  onRemoveFromReadBooks: (item: BookResult) => void;
 }
 
-const BookCardSearch: React.FC<BookCardSearchProps> = ({
+const RemoveReadBooksCard: React.FC<BookCardProps> = ({
   book,
-  onAddToFavorites,
-  onAddToReadBooks,
+  onRemoveFromReadBooks,
 }) => {
   const [truncateText, setTruncate] = useState(true);
-  const [isAddedToFavorites, setIsAddedToFavorites] = useState(false);
-  const [isAddedtoReadBooks, setIsAdded] = useState(false);
 
-  const handleAddToFavorites = () => {
-    onAddToFavorites(book);
-    setIsAddedToFavorites(true);
-  };
-  const handleAddToReadBooks = () => {
-    onAddToReadBooks(book);
-    setIsAdded(true);
+  const handleRemoveFromReadBooks = () => {
+    onRemoveFromReadBooks(book);
   };
 
   return (
@@ -43,9 +34,8 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
           <h5 className='mb-2 text-2x1 font-bold tracking-tight text-gray-900 dark:text-white'>
             {book.title}
           </h5>
-          <div>
-            <span className='font-semibold'>Author key:</span> {book.author_key}
-          </div>
+          <span className='font-semibold'>Author key: </span>
+          {book.author_key}
           <div>
             <span className='font-semibold'>Name: </span>
             {book.author_name}
@@ -55,35 +45,23 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
             {book.ebook_access}
           </div>
           <div>
-            <span className='font-semibold'>First Publish: </span>
+            <span className='font-semibold'>First publish: </span>
             {book.first_publish_year}
           </div>
           <div className={truncateText ? "truncate" : ""}>
             <span className='font-semibold'>First sentence: </span>
-            {book.first_sentence}
+            {book.author_name}
           </div>
         </div>
-        {!isAddedToFavorites ? (
-          <button
-            className='mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
-            onClick={handleAddToFavorites}
-          >
-            Add to Favorites
-          </button>
-        ) : (
-          <span className='text-green-500 text-2xl'>✔️</span>
-        )}
-        Add to read book:
-        {!isAddedtoReadBooks ? (
-          <button className='border: ' onClick={handleAddToReadBooks}>
-            +
-          </button>
-        ) : (
-          <span className='text-green-500 text-2xl'>✔️</span>
-        )}
+        <button
+          className='mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700'
+          onClick={handleRemoveFromReadBooks}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );
 };
 
-export default BookCardSearch;
+export default RemoveReadBooksCard;
