@@ -18,6 +18,9 @@ export default function Navbar() {
         <li>
           <Link to={"/favorites"}>Favorites</Link>
         </li>
+        <li>
+          <Link to={"/read books"}>Read Books</Link>
+        </li>
       </ul>
     </nav>
   );
