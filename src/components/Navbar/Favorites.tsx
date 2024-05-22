@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
-import {
-  GlobalStateContext,
-  BookResult,
-  authorResult,
-} from "../../Globalstate";
+import { GlobalStateContext } from "../../Globalstate";
+import { BookResult, authorResult } from "../Interface/Interface.ts";
 import BookCardFavorites from "../Card/CardBookFavorites.tsx";
 import AuthorCardFavorites from "../Card/CardAuthorFavorite.tsx";
 

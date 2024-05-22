@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { authorResult } from "../../Globalstate";
+import { authorResult } from "../Interface/Interface";
 
 interface AuthorCardProps {
   author: authorResult;

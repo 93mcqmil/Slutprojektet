@@ -5,6 +5,7 @@ import { GlobalStateProvider } from "../../Globalstate";
 import "tailwindcss/tailwind.css";
 import { HomePageContent } from "./HomePageContent";
 import About from "../Navbar/About";
+import ReadBooks from "../Navbar/ReadBooks";
 
 // HomePage component
 const HomePage: React.FC = () => {
@@ -13,6 +14,7 @@ const HomePage: React.FC = () => {
     { path: "/", element: <HomePageContent /> },
     { path: "/about", element: <About /> },
     { path: "/favorites", element: <Favorites /> },
+    { path: "/read books", element: <ReadBooks /> },
   ]);
 
   return (
