@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Favorites from "../Navbar/Favorites";
-import { GlobalStateProvider } from "../../Globalstate";
+import { GlobalStateProvider } from "../Contexts/Globalstate";
 import "tailwindcss/tailwind.css";
 import { HomePageContent } from "./HomePageContent";
 import About from "../Navbar/About";

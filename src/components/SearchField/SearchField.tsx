@@ -1,21 +1,29 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import { GlobalStateContext } from "../../../Globalstate";
-import BookCardSearch from "../../Card/BookCardSearch";
-import AuthorCardSearch from "../../Card/CardAuthorSearch";
-
+import { GlobalStateContext } from "../Contexts/Globalstate";
+import BookCardSearch from "../Card/CardBookSearch";
+import AuthorCardSearch from "../Card/CardAuthorSearch";
+import {
+  handleReviewSubmit,
+  useHandleAddToReadBooks,
+  useHandleAddToFavorites,
+} from "../utilities/Utils";
 import {
   BookResult,
   BookSearchResult,
   authorResult,
   authorSearchResult,
-} from "../../Interface/Interface";
+} from "../Interface/Interface";
+import { fetchBooks } from "../utilities/Fetch";
+
 //*************************************************************************** */
 
 export default function SearchField() {
-  const { favorites, addToFavorites } = useContext(GlobalStateContext);
-  const { readBooks, addToReadBooks } = useContext(GlobalStateContext);
+  //here i call the hooks because its being used here
+  const handleAddToReadBooks = useHandleAddToReadBooks();
+  const handleAddToFavorites = useHandleAddToFavorites();
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("author"); // Default searching for authors
+  const [searchType, setSearchType] = useState("author");
   const [loading, setLoading] = useState(false);
   const [searchResultsAuthors, setSearchResultsAuthors] =
     useState<authorSearchResult | null>(null);
@@ -36,27 +44,12 @@ export default function SearchField() {
       setSearchClicked(false); //Reset searchClicked at the beginning of searchClicked to prevent endless loop
 
       try {
-        let apiURL = "";
-        // API url based on search type
-        if (searchType === "author") {
-          apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=10`;
-        } else {
-          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=10`;
-        }
-
-        //fetch data from api
-        const response = await fetch(apiURL);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        //parse response json
-        const searchData = await response.json();
+        const searchData = await fetchBooks(searchType, searchTerm);
 
         //update state based on search type
         if (searchType === "author") {
           setSearchResultsAuthors(searchData);
+          updateSearchResultsAuthors(searchData.docs);
         } else {
           setSearchResultsBooks(searchData);
           updateSearchResultsBooks(searchData.docs);
@@ -67,7 +60,6 @@ export default function SearchField() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [
     searchClicked,
@@ -91,25 +83,6 @@ export default function SearchField() {
     setSearchType(event.target.value);
   };
 
-  const handleAddToFavorites = (item: BookResult | authorResult) => {
-    // check if item exists in favorites
-    if (favorites.some((fav) => fav.key === item.key)) {
-      alert("Its already in your favorites!");
-    } else {
-      addToFavorites(item);
-    }
-  };
-  const handleAddToReadBooks = (item: BookResult) => {
-    if (readBooks.some((book) => book.key === item.key)) {
-      alert("Its already added my friend!");
-    } else {
-      addToReadBooks(item);
-    }
-  };
-
-  const handleReviewSubmit = (book: BookResult, review: string) => {
-    console.log(`Review for ${book.title}: ${review}`);
-  };
   return (
     <>
       <div className='max-w-md mx-auto'>

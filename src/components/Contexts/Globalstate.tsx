@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { BookResult, authorResult } from "./components/Interface/Interface";
+import { BookResult, authorResult } from "../Interface/Interface";
 
 // define type for global state
 export type GlobalState = {
