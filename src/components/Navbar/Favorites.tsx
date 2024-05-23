@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { GlobalStateContext } from "../Contexts/Globalstate.tsx";
 import { BookResult, authorResult } from "../Interface/Interface.ts";
 import BookCardFavorites from "../Card/CardBookFavorites.tsx";
