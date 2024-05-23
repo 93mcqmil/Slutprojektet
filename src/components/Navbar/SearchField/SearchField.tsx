@@ -2,18 +2,28 @@ import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { GlobalStateContext } from "../../../Globalstate";
 import BookCardSearch from "../../Card/CardBookSearch";
 import AuthorCardSearch from "../../Card/CardAuthorSearch";
-
+import {
+  handleReviewSubmit,
+  useHandleAddToReadBooks,
+  useHandleAddToFavorites,
+} from "../../utilities/Utils";
 import {
   BookResult,
   BookSearchResult,
   authorResult,
   authorSearchResult,
 } from "../../Interface/Interface";
+
+//Define functions for API URL
+const AUTHOR_SEARCH_API = "https://openlibrary.org/search/authors.json";
+const TITLE_SEARCH_API = "https://openlibrary.org/search.json";
 //*************************************************************************** */
 
 export default function SearchField() {
-  const { favorites, addToFavorites } = useContext(GlobalStateContext);
-  const { readBooks, addToReadBooks } = useContext(GlobalStateContext);
+  //here i call the hooks because its being used here
+  const handleAddToReadBooks = useHandleAddToReadBooks();
+  const handleAddToFavorites = useHandleAddToFavorites();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchType, setSearchType] = useState("author"); // Default searching for authors
   const [loading, setLoading] = useState(false);
@@ -39,9 +49,9 @@ export default function SearchField() {
         let apiURL = "";
         // API url based on search type
         if (searchType === "author") {
-          apiURL = `https://openlibrary.org/search/authors.json?q=${searchTerm}&limit=10`;
+          apiURL = `${AUTHOR_SEARCH_API}?q=${searchTerm}&limit=10`;
         } else {
-          apiURL = `https://openlibrary.org/search.json?title=${searchTerm}&limit=10`;
+          apiURL = `${TITLE_SEARCH_API}?title=${searchTerm}&limit=10`;
         }
 
         //fetch data from api
@@ -91,25 +101,6 @@ export default function SearchField() {
     setSearchType(event.target.value);
   };
 
-  const handleAddToFavorites = (item: BookResult | authorResult) => {
-    // check if item exists in favorites
-    if (favorites.some((fav) => fav.key === item.key)) {
-      alert("Its already in your favorites!");
-    } else {
-      addToFavorites(item);
-    }
-  };
-  const handleAddToReadBooks = (item: BookResult) => {
-    if (readBooks.some((book) => book.key === item.key)) {
-      alert("Its already added my friend!");
-    } else {
-      addToReadBooks(item);
-    }
-  };
-
-  const handleReviewSubmit = (book: BookResult, review: string) => {
-    console.log(`Review for ${book.title}: ${review}`);
-  };
   return (
     <>
       <div className='max-w-md mx-auto'>
