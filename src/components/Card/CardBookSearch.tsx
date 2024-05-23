@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BookResult } from "../Interface/Interface";
+import { FaPaperPlane, FaTrash } from "react-icons/fa";
 
 interface BookCardSearchProps {
   book: BookResult;
@@ -35,6 +36,12 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
     onSubmitReview(book, reviewText);
     setSubmittedReview([...submittedReview, reviewText]);
     setReviewText("");
+  };
+
+  const handleReviewDelete = (index: number) => {
+    const newSubmittedReview = [...submittedReview];
+    newSubmittedReview.splice(index, 1);
+    setSubmittedReview(newSubmittedReview);
   };
 
   return (
@@ -107,13 +114,22 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
             type='submit'
             className='mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700 w-full'
           >
-            Submit
+            <FaPaperPlane />
           </button>
         </form>
         <div className='mt-4'>
           {submittedReview.map((review, index) => (
-            <div key={index} className='bg-gray-100 p-2 rounded mt-2'>
+            <div
+              key={index}
+              className='bg-gray-100 p-2 rounded mt-2 flex justify-between items-center'
+            >
               {review}
+              <button
+                onClick={() => handleReviewDelete(index)}
+                className='ml-2 text-red-500 hover:text-red-700'
+              >
+                <FaTrash />
+              </button>
             </div>
           ))}
         </div>
