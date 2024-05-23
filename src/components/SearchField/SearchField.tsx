@@ -1,19 +1,19 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import { GlobalStateContext } from "../../../Globalstate";
-import BookCardSearch from "../../Card/CardBookSearch";
-import AuthorCardSearch from "../../Card/CardAuthorSearch";
+import { GlobalStateContext } from "../Contexts/Globalstate";
+import BookCardSearch from "../Card/CardBookSearch";
+import AuthorCardSearch from "../Card/CardAuthorSearch";
 import {
   handleReviewSubmit,
   useHandleAddToReadBooks,
   useHandleAddToFavorites,
-} from "../../utilities/Utils";
+} from "../utilities/Utils";
 import {
   BookResult,
   BookSearchResult,
   authorResult,
   authorSearchResult,
-} from "../../Interface/Interface";
-import { fetchBooks } from "../../utilities/Fetch";
+} from "../Interface/Interface";
+import { fetchBooks } from "../utilities/Fetch";
 
 //*************************************************************************** */
 
@@ -23,7 +23,7 @@ export default function SearchField() {
   const handleAddToFavorites = useHandleAddToFavorites();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("author"); // Default searching for authors
+  const [searchType, setSearchType] = useState("author");
   const [loading, setLoading] = useState(false);
   const [searchResultsAuthors, setSearchResultsAuthors] =
     useState<authorSearchResult | null>(null);

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GlobalStateContext } from "../../Globalstate";
+import { GlobalStateContext } from "../Contexts/Globalstate.tsx";
 import RemoveReadBooks from "../Card/RemoveReadBooks.tsx";
 
 export default function ReadBooks() {

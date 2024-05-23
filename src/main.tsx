@@ -3,10 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/Homepage/HomePage";
-import Favorites from "./components/Navbar/Favorites";
+import { Favorites, About, ReadBooks } from "./components/Navbar/index"; //index.ts
 import ErrorPage from "./error-page";
-import About from "./components/Navbar/About";
-import ReadBooks from "./components/Navbar/ReadBooks";
 
 const router = createBrowserRouter([
   {

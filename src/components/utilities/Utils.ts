@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BookResult, authorResult } from "../Interface/Interface";
-import { GlobalStateContext } from "../../Globalstate";
+import { GlobalStateContext } from "../Contexts/Globalstate";
 
 //custom hook to use globalState & placed inside function body
 const useGlobalState = () => {
@@ -29,7 +29,7 @@ export const useHandleAddToReadBooks = () => {
     };
     return handleAddToReadBooks;
 }
-
+/****************************************************** */
 export const useHandleAddToFavorites = () => {
     const { favorites, addToFavorites } = useGlobalState();
 
