@@ -13,10 +13,8 @@ import {
   authorResult,
   authorSearchResult,
 } from "../../Interface/Interface";
+import { fetchBooks } from "../../utilities/Fetch";
 
-//Define functions for API URL
-const AUTHOR_SEARCH_API = "https://openlibrary.org/search/authors.json";
-const TITLE_SEARCH_API = "https://openlibrary.org/search.json";
 //*************************************************************************** */
 
 export default function SearchField() {
@@ -46,27 +44,12 @@ export default function SearchField() {
       setSearchClicked(false); //Reset searchClicked at the beginning of searchClicked to prevent endless loop
 
       try {
-        let apiURL = "";
-        // API url based on search type
-        if (searchType === "author") {
-          apiURL = `${AUTHOR_SEARCH_API}?q=${searchTerm}&limit=10`;
-        } else {
-          apiURL = `${TITLE_SEARCH_API}?title=${searchTerm}&limit=10`;
-        }
-
-        //fetch data from api
-        const response = await fetch(apiURL);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        //parse response json
-        const searchData = await response.json();
+        const searchData = await fetchBooks(searchType, searchTerm);
 
         //update state based on search type
         if (searchType === "author") {
           setSearchResultsAuthors(searchData);
+          updateSearchResultsAuthors(searchData.docs);
         } else {
           setSearchResultsBooks(searchData);
           updateSearchResultsBooks(searchData.docs);
@@ -77,7 +60,6 @@ export default function SearchField() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [
     searchClicked,
