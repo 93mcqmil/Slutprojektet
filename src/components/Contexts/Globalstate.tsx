@@ -8,7 +8,7 @@ export type GlobalState = {
   addToFavorites: (item: BookResult | authorResult) => void;
   removeFromFavorites: (item: BookResult | authorResult) => void;
   authorResults: authorResult[];
-  updateSearchResultsBooks: (newBooks: BookResult[]) => void; //add the update function here
+  updateSearchResultsBooks: (newBooks: BookResult[]) => void;
   updateSearchResultsAuthors: (newAuthors: authorResult[]) => void;
   readBooks: BookResult[];
   addToReadBooks: (item: BookResult) => void;
@@ -18,23 +18,25 @@ export type GlobalState = {
 // create global state context to keep track of books
 export const GlobalStateContext = createContext<GlobalState>({
   bookResults: [], // Array to store search results for books
-  favorites: [], // Array to store search results for authors
-  authorResults: [], // Array to store search results authors
-  updateSearchResultsBooks: () => {}, // Function to update the book search results
-  updateSearchResultsAuthors: () => {}, // Function to update the author search results
-  addToFavorites: () => {}, // Function to add an item to favorites
-  removeFromFavorites: () => {}, // Function to remove an item from favorites
-  readBooks: [], // Array to store all read books
-  addToReadBooks: () => {}, // function to add a item to readbooks
-  removeReadBooks: () => {}, // function to remove item fom readbooks
+  favorites: [],
+  authorResults: [],
+  updateSearchResultsBooks: () => {},
+  updateSearchResultsAuthors: () => {},
+  addToFavorites: () => {},
+  removeFromFavorites: () => {},
+  readBooks: [],
+  addToReadBooks: () => {},
+  removeReadBooks: () => {},
 });
 
 //create global state provider component
 export const GlobalStateProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [bookResults, setBookResults] = useState<BookResult[]>([]); // state variable for book results
-  const [authorResults, setAuthorsResults] = useState<authorResult[]>([]); // state variable for author results
+  const [bookResults, setBookResults] = useState<BookResult[]>([]);
+  const [authorResults, setAuthorsResults] = useState<authorResult[]>([]);
+  const [favorites, setFavorites] = useState<(BookResult | authorResult)[]>([]);
+  const [readBooks, setReadBooks] = useState<BookResult[]>([]);
 
   // update function for book results
   const updateSearchResultsBooks = (newBooks: BookResult[]) => {
@@ -44,10 +46,8 @@ export const GlobalStateProvider: React.FC<{ children: React.ReactNode }> = ({
   const updateSearchResultsAuthors = (newAuthors: authorResult[]) => {
     setAuthorsResults(newAuthors);
   };
-  const [favorites, setFavorites] = useState<(BookResult | authorResult)[]>([]);
-  const [readBooks, setReadBooks] = useState<BookResult[]>([]);
 
-  useEffect(() => {}, [favorites, readBooks]); // Log favorites and readBooks whenever it changes
+  useEffect(() => {}, [favorites, readBooks]); // Left it for debugging purposes
 
   const value: GlobalState = {
     bookResults,
