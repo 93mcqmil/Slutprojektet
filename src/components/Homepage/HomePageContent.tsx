@@ -4,7 +4,7 @@ import SearchField from "../SearchField/SearchField";
 export const HomePageContent: React.FC = () => {
   const { pathname } = useLocation();
 
-  // Render the SearchField only if the current path is the homepage
+  //  only render if "/"
   if (pathname === "/") {
     return (
       <div>
@@ -12,6 +12,6 @@ export const HomePageContent: React.FC = () => {
       </div>
     );
   } else {
-    return null; // Render nothing for other paths
+    return null; // Render no paths
   }
 };

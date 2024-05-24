@@ -76,10 +76,11 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
           <span className='font-semibold'>First Publish:</span>{" "}
           {book.first_publish_year}
           <br />
-          <div className={truncateText ? "truncate max-w-full" : ""}>
+          <span>
+            className={truncateText ? "truncate max-w-full" : ""}
             <span className='font-semibold'>First sentence:</span>{" "}
             {book.first_sentence}
-          </div>
+          </span>
         </p>
         <div className='flex justify-between mt-4'>
           <div>

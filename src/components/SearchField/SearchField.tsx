@@ -18,7 +18,6 @@ import { fetchBooks } from "../utilities/Fetch";
 //*************************************************************************** */
 
 export default function SearchField() {
-  //here i call the hooks because its being used here
   const handleAddToReadBooks = useHandleAddToReadBooks();
   const handleAddToFavorites = useHandleAddToFavorites();
 
@@ -29,8 +28,9 @@ export default function SearchField() {
     useState<authorSearchResult | null>(null);
   const [searchResultsBooks, setSearchResultsBooks] =
     useState<BookSearchResult | null>(null);
-  const { updateSearchResultsBooks } = useContext(GlobalStateContext);
-  const { updateSearchResultsAuthors } = useContext(GlobalStateContext);
+  const { updateSearchResultsBooks, updateSearchResultsAuthors } =
+    useContext(GlobalStateContext);
+
   const [searchClicked, setSearchClicked] = useState(false);
 
   //Effect hook to fetch data when search term or searh type changes
