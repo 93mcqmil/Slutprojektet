@@ -66,7 +66,7 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
         <h5 className='mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white'>
           {book.title}
         </h5>
-        <p className='text-gray-700 dark:text-gray-400'>
+        <div className='text-gray-700 dark:text-gray-400'>
           <span className='font-semibold'>Author key:</span> {book.author_key}
           <br />
           <span className='font-semibold'>Name:</span> {book.author_name}
@@ -76,12 +76,11 @@ const BookCardSearch: React.FC<BookCardSearchProps> = ({
           <span className='font-semibold'>First Publish:</span>{" "}
           {book.first_publish_year}
           <br />
-          <span>
-            className={truncateText ? "truncate max-w-full" : ""}
+          <div className={truncateText ? "truncate" : ""}>
             <span className='font-semibold'>First sentence:</span>{" "}
-            {book.first_sentence}
-          </span>
-        </p>
+            <span className='inline-block'>{book.first_sentence}</span>
+          </div>
+        </div>
         <div className='flex justify-between mt-4'>
           <div>
             {!isAddedToFavorites ? (
